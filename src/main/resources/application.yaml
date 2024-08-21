@@ -1,3 +1,15 @@
 spring:
   application:
     name: webflux-playground
+  r2dbc:
+    url:
+    username:
+    password:
+  sql:
+    init:
+      data-locations:
+        - classpath:sql/data.sql
+
+logging:
+  level:
+    org.springframework.r2dbc: TRACE
