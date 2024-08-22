@@ -2,8 +2,8 @@ spring:
   application:
     name: webflux-playground
   r2dbc:
-    url:
-    username:
+    url: r2dbc:h2:mem:///testdb
+    username: sa
     password:
   sql:
     init:
@@ -13,3 +13,5 @@ spring:
 logging:
   level:
     org.springframework.r2dbc: TRACE
+
+sec: sec01
