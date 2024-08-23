@@ -3,6 +3,7 @@ package com.sdragon.webfluxplayground.sec03.service;
 import com.sdragon.webfluxplayground.sec03.dto.CustomerDto;
 import com.sdragon.webfluxplayground.sec03.mapper.EntityDtoMapper;
 import com.sdragon.webfluxplayground.sec03.repository.CustomerRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,6 +19,11 @@ public class CustomerService {
 
     public Flux<CustomerDto> getAllCustomers() {
         return customerRepository.findAll()
+                .map(EntityDtoMapper::toDto);
+    }
+
+    public Flux<CustomerDto> getAllCustomers(Integer  page, Integer size) {
+        return customerRepository.findBy(PageRequest.of(page - 1, size))
                 .map(EntityDtoMapper::toDto);
     }
 
@@ -42,7 +48,7 @@ public class CustomerService {
                 .map(EntityDtoMapper::toDto);
     }
 
-    public Mono<Void> deleteCustomerById(Integer id) {
-        return customerRepository.deleteById(id);
+    public Mono<Boolean> deleteCustomerById(Integer id) {
+        return customerRepository.deleteCustomerById(id);
     }
 }
