@@ -33,7 +33,6 @@ public class CustomerService {
     }
 
     public Mono<CustomerDto> saveCustomer(Mono<CustomerDto> mono) {
-        // TODO: We should do input validation
         return mono.map(EntityDtoMapper::toEntity)
                 .flatMap(customerRepository::save)
                 .map(EntityDtoMapper::toDto);
